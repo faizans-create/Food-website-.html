@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Foodie Fleet - Your Food Delivery Partner</title>
+
+    <!-- Favicon (Website Logo in Tab) -->
+    <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/3075/3075977.png">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts: Inter -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Epunda+Sans:ital,wght@0,300..900;1,300..900&family=Epunda+Slab:ital,wght@0,300..900;1,300..900&family=Imperial+Script&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        /* Custom Styles */
+        boddy {
+  font-family: "Imperial Script", cursive;
+  font-weight: 400;
+  font-style: normal;
+  background-color: #f8f9fa; /* A very light grey background */
+        }
+        .hero-bg {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1600&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+        .modal {
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+        .modal-content {
+            transition: transform 0.3s ease;
+        }
+        .rating-stars i:hover {
+            transform: scale(1.1);
+        }
+        .category-card:hover i {
+             color: #ef4444; /* red-500 */
+        }
+        .toast {
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <!-- Header / Navbar -->
+    <header class="bg-white/80 backdrop-blur-lg shadow-md sticky top-0 z-40">
+        <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <!-- Logo -->
+            <a href="#" class="flex items-center space-x-2">
+                <i class="fas fa-truck-fast text-2xl text-red-500"></i>
+                <span class="text-xl font-bold text-gray-800">Foodie Fleet</span>
+            </a>
+            
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex items-center space-x-6">
+                <a href="#home" class="text-gray-600 hover:text-red-500 font-medium transition">Home</a>
+                <a href="#cricket-deals" class="text-gray-600 hover:text-red-500 font-medium transition">Deals</a>
+                <a href="#restaurants" class="text-gray-600 hover:text-red-500 font-medium transition">Restaurants</a>
+                <button id="serviceBtn" class="text-gray-600 hover:text-red-500 font-medium transition">Customer Service</button>
+            </div>
+
+            <!-- Right side buttons & Location -->
+            <div class="flex items-center space-x-4">
+                 <button id="locationBtn" class="hidden sm:flex items-center space-x-2 bg-gray-100 px-3 py-2 rounded-full hover:bg-gray-200 transition">
+                    <i class="fas fa-map-marker-alt text-red-500"></i>
+                    <span id="locationText" class="text-sm font-medium text-gray-700">Karachi, Sindh</span>
+                </button>
+                <button id="cartBtn" class="relative text-gray-600 hover:text-red-500 transition">
+                    <i class="fas fa-shopping-cart text-2xl"></i>
+                    <span id="cart-count" class="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">0</span>
+                </button>
+                <button id="mobileMenuBtn" class="md:hidden text-gray-600 hover:text-red-500 transition">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </nav>
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="hidden md:hidden px-6 pb-4 space-y-2">
+             <a href="#home" class="block text-gray-600 hover:text-red-500 font-medium transition">Home</a>
+             <a href="#cricket-deals" class="block text-gray-600 hover:text-red-500 font-medium transition">Deals</a>
+             <a href="#restaurants" class="block text-gray-600 hover:text-red-500 font-medium transition">Restaurants</a>
+             <button id="serviceBtnMobile" class="block text-gray-600 hover:text-red-500 font-medium transition text-left w-full">Customer Service</button>
+             <button id="locationBtnMobile" class="flex items-center space-x-2 text-gray-600 hover:text-red-500 font-medium transition mt-2">
+                <i class="fas fa-map-marker-alt text-red-500"></i>
+                <span id="locationTextMobile">Karachi, Sindh</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="hero-bg h-[60vh] flex items-center justify-center text-center text-white">
+            <div class="container mx-auto px-6">
+                <h1 class="text-4xl md:text-6xl font-extrabold mb-4 leading-tight">Your next meal, delivered.</h1>
+                <p class="text-lg md:text-xl mb-8 max-w-2xl mx-auto">Discover the best food from over 1,000 restaurants and fast delivery to your doorstep.</p>
+                <div class="flex flex-col sm:flex-row max-w-xl mx-auto bg-white rounded-full p-2 shadow-lg">
+                    <input type="text" placeholder="Enter your delivery address" class="flex-grow p-3 text-gray-700 rounded-full sm:rounded-l-full sm:rounded-r-none focus:outline-none mb-2 sm:mb-0">
+                    <button class="bg-red-500 text-white font-bold py-3 px-8 rounded-full hover:bg-red-600 transition">Find Food</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Popular Categories Section -->
+        <section id="categories" class="py-16 bg-white">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-3xl font-bold mb-8">Popular Categories</h2>
+                <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-6">
+                    <a href="#" class="category-link p-4 bg-gray-100 rounded-lg flex flex-col items-center justify-center space-y-3 hover:shadow-lg hover:-translate-y-1 transition category-card" data-category="Pizza">
+                        <i class="fas fa-pizza-slice text-4xl text-gray-600 transition"></i>
+                        <span class="font-bold">Pizza</span>
+                    </a>
+                    <a href="#" class="category-link p-4 bg-gray-100 rounded-lg flex flex-col items-center justify-center space-y-3 hover:shadow-lg hover:-translate-y-1 transition category-card" data-category="Burgers">
+                        <i class="fas fa-hamburger text-4xl text-gray-600 transition"></i>
+                        <span class="font-bold">Burgers</span>
+                    </a>
+                    <a href="#" class="category-link p-4 bg-gray-100 rounded-lg flex flex-col items-center justify-center space-y-3 hover:shadow-lg hover:-translate-y-1 transition category-card" data-category="Pakistani">
+                         <i class="fas fa-drumstick-bite text-4xl text-gray-600 transition"></i>
+                        <span class="font-bold">Pakistani</span>
+                    </a>
+                    <a href="#" class="category-link p-4 bg-gray-100 rounded-lg flex flex-col items-center justify-center space-y-3 hover:shadow-lg hover:-translate-y-1 transition category-card" data-category="Chinese">
+                        <i class="fas fa-utensils text-4xl text-gray-600 transition"></i>
+                        <span class="font-bold">Chinese</span>
+                    </a>
+                    <a href="#" class="category-link p-4 bg-gray-100 rounded-lg flex flex-col items-center justify-center space-y-3 hover:shadow-lg hover:-translate-y-1 transition category-card" data-category="Desserts">
+                        <i class="fas fa-ice-cream text-4xl text-gray-600 transition"></i>
+                        <span class="font-bold">Desserts</span>
+                    </a>
+                    <a href="#" class="category-link p-4 bg-gray-100 rounded-lg flex flex-col items-center justify-center space-y-3 hover:shadow-lg hover:-translate-y-1 transition category-card" data-category="BBQ">
+                        <i class="fas fa-pepper-hot text-4xl text-gray-600 transition"></i>
+                        <span class="font-bold">BBQ</span>
+                    </a>
+                    <a href="#" class="category-link p-4 bg-gray-100 rounded-lg flex flex-col items-center justify-center space-y-3 hover:shadow-lg hover:-translate-y-1 transition category-card" data-category="Healthy">
+                        <i class="fas fa-carrot text-4xl text-gray-600 transition"></i>
+                        <span class="font-bold">Healthy</span>
+                    </a>
+                    <a href="#" class="category-link p-4 bg-gray-100 rounded-lg flex flex-col items-center justify-center space-y-3 hover:shadow-lg hover:-translate-y-1 transition category-card" data-category="Sushi">
+                        <i class="fas fa-fish text-4xl text-gray-600 transition"></i>
+                        <span class="font-bold">Sushi</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Cricket Night Deals Section -->
+        <section id="cricket-deals" class="py-16 bg-gray-800 text-white">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-3xl font-bold mb-2">Cricket Night Deals! 🏏</h2>
+                <p class="mb-8 text-gray-300">Perfect combos for the big match. Don't miss out!</p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Deal Card 1 -->
+                    <div class="bg-gray-700 rounded-lg shadow-lg overflow-hidden transform hover:scale-105 transition">
+                        <img src="https://images.unsplash.com/photo-1574126154517-d1e0d89ef734?auto=format&fit=crop&w=600&q=80" alt="Sixer Pizza Deal" class="w-full h-48 object-cover" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/ffffff?text=Food+Image';">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Sixer Pizza Deal</h3>
+                            <p class="text-gray-300 mb-4">2 Large Pizzas + 1.5L Drink</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-2xl font-bold text-green-400">Rs. 1999</span>
+                                <button class="add-to-cart-btn bg-red-500 text-white font-bold py-2 px-4 rounded-full hover:bg-red-600 transition" data-item="Sixer Pizza Deal" data-price="1999">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                     <!-- Deal Card 2 -->
+                    <div class="bg-gray-700 rounded-lg shadow-lg overflow-hidden transform hover:scale-105 transition">
+                        <img src="https://images.unsplash.com/photo-1551782450-a2132b4ba21d?auto=format&fit=crop&w=600&q=80" alt="Boundary Burger Combo" class="w-full h-48 object-cover" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/ffffff?text=Food+Image';">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Boundary Burger Combo</h3>
+                            <p class="text-gray-300 mb-4">4 Zinger Burgers + Fries + 1.5L Drink</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-2xl font-bold text-green-400">Rs. 2499</span>
+                                <button class="add-to-cart-btn bg-red-500 text-white font-bold py-2 px-4 rounded-full hover:bg-red-600 transition" data-item="Boundary Burger Combo" data-price="2499">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                     <!-- Deal Card 3 -->
+                    <div class="bg-gray-700 rounded-lg shadow-lg overflow-hidden transform hover:scale-105 transition">
+                        <img src="https://images.unsplash.com/photo-1589302168068-964664d93dc0?auto=format&fit=crop&w=600&q=80" alt="Full Toss Biryani" class="w-full h-48 object-cover" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/ffffff?text=Food+Image';">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Full Toss Biryani Feast</h3>
+                            <p class="text-gray-300 mb-4">4 Boxes of Chicken Biryani + Raita</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-2xl font-bold text-green-400">Rs. 1499</span>
+                                <button class="add-to-cart-btn bg-red-500 text-white font-bold py-2 px-4 rounded-full hover:bg-red-600 transition" data-item="Full Toss Biryani Feast" data-price="1499">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Featured Restaurants Section -->
+        <section id="restaurants" class="py-16">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl font-bold text-center mb-8">Featured Restaurants</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <!-- Restaurant Card -->
+                    <div class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition duration-300">
+                        <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=600&q=80" alt="Pizza Max" class="w-full h-48 object-cover" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/ffffff?text=Pizza+Max';">
+                        <div class="p-4">
+                            <h3 class="text-xl font-bold">Pizza Max</h3>
+                            <p class="text-gray-600 text-sm mb-2">Italian, Pizza</p>
+                            <div class="flex items-center text-yellow-400 rating-stars" data-restaurant-id="pizza-max">
+                                <i class="far fa-star cursor-pointer"></i><i class="far fa-star cursor-pointer"></i><i class="far fa-star cursor-pointer"></i><i class="far fa-star cursor-pointer"></i><i class="far fa-star cursor-pointer"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition duration-300">
+                        <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=600&q=80" alt="Burger Lab" class="w-full h-48 object-cover" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/ffffff?text=Burger+Lab';">
+                        <div class="p-4">
+                            <h3 class="text-xl font-bold">Burger Lab</h3>
+                            <p class="text-gray-600 text-sm mb-2">Fast Food, Burgers</p>
+                            <div class="flex items-center text-yellow-400 rating-stars" data-restaurant-id="burger-lab">
+                                <i class="far fa-star cursor-pointer"></i><i class="far fa-star cursor-pointer"></i><i class="far fa-star cursor-pointer"></i><i class="far fa-star cursor-pointer"></i><i class="far fa-star cursor-pointer"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition duration-300">
+                        <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=600&q=80" alt="BBQ Central" class="w-full h-48 object-cover" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/ffffff?text=BBQ+Central';">
+                        <div class="p-4">
+                            <h3 class="text-xl font-bold">BBQ Central</h3>
+                            <p class="text-gray-600 text-sm mb-2">Pakistani, BBQ</p>
+                           <div class="flex items-center text-yellow-400 rating-stars" data-restaurant-id="bbq-central">
+                                <i class="far fa-star cursor-pointer"></i><i class="far fa-star cursor-pointer"></i><i class="far fa-star cursor-pointer"></i><i class="far fa-star cursor-pointer"></i><i class="far fa-star cursor-pointer"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition duration-300">
+                        <img src="https://plus.unsplash.com/premium_photo-1678051141689-1f7a7861b3b4?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8dGFjb3xlbnwwfHwwfHx8MA%3D%3D"alt="Taco Town" class="w-full h-48 object-cover" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/ffffff?text=Taco+Town';">
+                        <div class="p-4">
+                            <h3 class="text-xl font-bold">Taco Town</h3>
+                            <p class="text-gray-600 text-sm mb-2">Mexican, Tacos</p>
+                            <div class="flex items-center text-yellow-400 rating-stars" data-restaurant-id="taco-town">
+                                <i class="far fa-star cursor-pointer"></i><i class="far fa-star cursor-pointer"></i><i class="far fa-star cursor-pointer"></i><i class="far fa-star cursor-pointer"></i><i class="far fa-star cursor-pointer"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-6 text-center">
+            <p>&copy; 2025 Foodie Fleet. All Rights Reserved.</p>
+            <div class="mt-4">
+                <a href="#" class="text-gray-400 hover:text-white mx-2">About Us</a>
+                <a href="#" class="text-gray-400 hover:text-white mx-2">Contact</a>
+                <a href="#" class="text-gray-400 hover:text-white mx-2">Privacy Policy</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modals (Pop-ups) -->
+
+    <!-- Shopping Cart Modal -->
+    <div id="cartModal" class="modal fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden opacity-0 -translate-y-4">
+        <div class="modal-content bg-white rounded-lg shadow-xl w-full max-w-lg mx-4 transform translate-y-0">
+            <!-- Header -->
+            <div class="flex justify-between items-center border-b p-4">
+                <h3 class="text-xl font-bold">Your Cart</h3>
+                <button id="closeCartBtn" class="text-gray-500 hover:text-gray-800 text-3xl leading-none">&times;</button>
+            </div>
+            <!-- Body -->
+            <div id="cart-items" class="p-6 overflow-y-auto max-h-96">
+                <!-- Cart items will be injected here -->
+                <p class="text-gray-500 text-center">Your cart is empty.</p>
+            </div>
+            <!-- Footer -->
+            <div class="border-t p-4 bg-gray-50 rounded-b-lg">
+                <div class="flex justify-between items-center mb-4">
+                    <span class="text-lg font-bold">Total:</span>
+                    <span id="cart-total" class="text-lg font-bold">Rs. 0</span>
+                </div>
+                <button class="w-full bg-green-500 text-white py-3 rounded-lg font-bold hover:bg-green-600 transition">Proceed to Checkout</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Customer Service Modal -->
+     <div id="serviceModal" class="modal fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden opacity-0 -translate-y-4">
+        <div class="modal-content bg-white rounded-lg shadow-xl w-full max-w-lg mx-4 transform translate-y-0">
+            <!-- Header -->
+            <div class="flex justify-between items-center border-b p-4">
+                <h3 class="text-xl font-bold">Customer Service</h3>
+                <button id="closeServiceBtn" class="text-gray-500 hover:text-gray-800 text-3xl leading-none">&times;</button>
+            </div>
+            <!-- Body -->
+            <div class="p-6 space-y-4">
+                <p class="text-gray-700">Have an issue? We're here to help! Reach out to us via any of the methods below.</p>
+                <div>
+                    <h4 class="font-bold text-lg">Live Chat</h4>
+                    <p class="text-gray-600">Available 24/7 for immediate assistance.</p>
+                    <button class="mt-2 bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-600 transition">Start Chat</button>
+                </div>
+                 <div>
+                    <h4 class="font-bold text-lg">Email Us</h4>
+                    <p class="text-gray-600">Get a response within 12 hours. <a href="mailto:support@foodiefleet.com" class="text-red-500">support@foodiefleet.com</a></p>
+                </div>
+                 <div>
+                    <h4 class="font-bold text-lg">Call Us</h4>
+                    <p class="text-gray-600">Talk to a representative at <a href="tel:+923001234567" class="text-red-500">+92 300 1234567</a>.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Category Restaurants Modal -->
+    <div id="categoryModal" class="modal fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden opacity-0 -translate-y-4">
+        <div class="modal-content bg-white rounded-lg shadow-xl w-full max-w-3xl mx-4 transform translate-y-0 flex flex-col">
+            <div class="flex justify-between items-center border-b p-4">
+                <h3 id="categoryModalTitle" class="text-xl font-bold">Restaurants</h3>
+                <button id="closeCategoryBtn" class="text-gray-500 hover:text-gray-800 text-3xl leading-none">&times;</button>
+            </div>
+            <div id="category-restaurants-list" class="p-6 overflow-y-auto grid grid-cols-1 md:grid-cols-2 gap-6" style="max-height: 65vh;">
+                <!-- Restaurant items will be injected here by JS -->
+            </div>
+            <div class="border-t p-4 bg-gray-50 text-right rounded-b-lg mt-auto">
+                <button id="footerCloseCategoryBtn" class="bg-gray-600 text-white py-2 px-6 rounded-lg font-bold hover:bg-gray-700 transition">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Location Modal -->
+    <div id="locationModal" class="modal fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden opacity-0 -translate-y-4">
+        <div class="modal-content bg-white rounded-lg shadow-xl w-full max-w-sm mx-4 transform translate-y-0">
+            <div class="flex justify-between items-center border-b p-4">
+                <h3 class="text-xl font-bold">Set Your Location</h3>
+                <button id="closeLocationBtn" class="text-gray-500 hover:text-gray-800 text-3xl leading-none">&times;</button>
+            </div>
+            <div class="p-6 space-y-4">
+                <div>
+                    <label for="cityInput" class="block text-sm font-medium text-gray-700">City</label>
+                    <input type="text" id="cityInput" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-red-500 focus:border-red-500" placeholder="e.g., Karachi">
+                </div>
+                 <div>
+                    <label for="provinceInput" class="block text-sm font-medium text-gray-700">Province / State</label>
+                    <input type="text" id="provinceInput" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-red-500 focus:border-red-500" placeholder="e.g., Sindh">
+                </div>
+                 <button id="setLocationConfirmBtn" class="w-full bg-red-500 text-white py-2 rounded-lg font-bold hover:bg-red-600 transition">Set Location</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Rating Toast -->
+    <div id="rating-toast" class="toast fixed bottom-5 right-5 bg-green-500 text-white py-3 px-5 rounded-lg shadow-lg opacity-0 transform translate-y-4">
+        Thank you for your rating!
+    </div>
+
+
+    <!-- JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // --- STATE (Memory) ---
+            const cart = [];
+            let ratings = {};
+
+            // --- MODAL ELEMENTS ---
+            const cartModal = document.getElementById('cartModal');
+            const serviceModal = document.getElementById('serviceModal');
+            const locationModal = document.getElementById('locationModal');
+
+            // --- BUTTONS ---
+            const cartBtn = document.getElementById('cartBtn');
+            const closeCartBtn = document.getElementById('closeCartBtn');
+            const serviceBtn = document.getElementById('serviceBtn');
+            const serviceBtnMobile = document.getElementById('serviceBtnMobile');
+            const closeServiceBtn = document.getElementById('closeServiceBtn');
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const locationBtn = document.getElementById('locationBtn');
+            const locationBtnMobile = document.getElementById('locationBtnMobile');
+            const closeLocationBtn = document.getElementById('closeLocationBtn');
+            const setLocationConfirmBtn = document.getElementById('setLocationConfirmBtn');
+
+            // --- DYNAMIC CONTENT ELEMENTS ---
+            const cartCount = document.getElementById('cart-count');
+            const cartItemsContainer = document.getElementById('cart-items');
+            const cartTotal = document.getElementById('cart-total');
+            const mobileMenu = document.getElementById('mobileMenu');
+            const locationText = document.getElementById('locationText');
+            const locationTextMobile = document.getElementById('locationTextMobile');
+            const cityInput = document.getElementById('cityInput');
+            const provinceInput = document.getElementById('provinceInput');
+            const ratingToast = document.getElementById('rating-toast');
+            
+            // --- CATEGORY MODAL ELEMENTS ---
+            const categoryModal = document.getElementById('categoryModal');
+            const closeCategoryBtn = document.getElementById('closeCategoryBtn');
+            const categoryModalTitle = document.getElementById('categoryModalTitle');
+            const categoryRestaurantsList = document.getElementById('category-restaurants-list');
+            const categoryLinks = document.querySelectorAll('.category-link');
+            const footerCloseCategoryBtn = document.getElementById('footerCloseCategoryBtn');
+
+            // --- Restaurant Data for Categories ---
+            const restaurantData = {
+                'Pizza': [
+                    { id: 'pizza-max', name: 'Pizza Max', desc: 'The cheesiest pizzas in town.', img: 'https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=600&q=80' },
+                    { id: 'california-pizza', name: 'California Pizza', desc: 'Authentic taste of California.', img: "" },
+                    { id: 'broadway-pizza', name: 'Broadway Pizza', desc: 'Giant slices, giant flavors.', img: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=600&q=80' },
+                    { id: 'pizza-hut', name: 'Pizza Hut', desc: 'A classic choice for everyone.', img: 'https://images.unsplash.com/photo-1593560708920-61dd98c46a4e?auto=format&fit=crop&w=600&q=80' },
+        
+                ],
+                'Burgers': [
+                    { id: 'burger-lab', name: 'Burger Lab', desc: 'Experimenting with flavors.', img: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=600&q=80' },
+                    { id: 'oh-my-grill', name: 'Oh My Grill', desc: 'Grilled to perfection.', img: 'https://images.unsplash.com/photo-1571091718767-18b5b1457add?auto=format&fit=crop&w=600&q=80' },
+                    { id: 'burger-king', name: 'Burger King', desc: 'Home of the Whopper.', img: 'https://images.unsplash.com/photo-1603064752734-4b42eff4583c?auto=format&fit=crop&w=600&q=80' },
+                    { id: 'the-sauce', name: 'The Sauce', desc: 'It\'s all in the sauce.', img: 'https://images.unsplash.com/photo-1627907228175-2bf846a303b4?auto=format&fit=crop&w=600&q=80' }
+                ],
+                'Pakistani': [
+                    { id: 'student-biryani', name: 'Student Biryani', desc: 'The most famous biryani.', img: 'https://images.unsplash.com/photo-1589302168068-964664d93dc0?auto=format&fit=crop&w=600&q=80' },
+                    { id: 'kolachi', name: 'Kolachi Restaurant', desc: 'Seaside dining experience.', img: 'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' },
+                    { id: 'saltanat', name: 'Saltanat Restaurant', desc: 'Royal mughlai cuisine.', img: 'https://images.unsplash.com/photo-1508615263227-c5d58c1e5821?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8Z3JpbGx8ZW58MHx8MHx8fDA%3D' },
+                    { id: 'lal-qila', name: 'Lal Qila', desc: 'A taste of history.', img:'https://plus.unsplash.com/premium_photo-1661313610483-d501730ce142?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fGdyaWxsfGVufDB8fDB8fHww' },
+                    { id: 'bundoo-khan', name: 'Bundoo Khan', desc: 'Legendary BBQ & Paratha.', img: 'https://images.unsplash.com/photo-1616252980327-ec70572e5df9?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fGdyaWxsfGVufDB8fDB8fHww' }
+                ],
+                 'Chinese': [
+                    { id: 'ginsoy', name: 'Ginsoy Extreme Chinese', desc: 'A modern take on Chinese food.', img: 'https://images.unsplash.com/photo-1585032226651-759b368d7246?auto=format&fit=crop&w=600&q=80' },
+                    { id: 'dynasty', name: 'Dynasty', desc: 'Classic Chinese fine dining.', img: 'https://images.unsplash.com/photo-1608039733145-603c07cad096?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' },
+                ],
+                'Desserts': [
+                    { id: 'butlers-cafe', name: 'Butler\'s Chocolate Cafe', desc: 'For the love of chocolate.', img: 'https://images.unsplash.com/photo-1530373239216-42518e6b4063?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' },
+                    { id: 'hot-spot-cafe', name: 'Hot Spot Cafe', desc: 'Ice creams and good times.', img: 'https://images.unsplash.com/photo-1567197786959-a29a393521d4?auto=format&fit=crop&w=600&q=80' },
+                    { id: 'scream', name: 'Scream', desc: 'Premium ice cream parlor.', img: 'https://images.unsplash.com/photo-1622941367239-8acd68fa946d?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y3JlYW15JTIwcGFzdHJyeXxlbnwwfHwwfHx8MA%3D%3D' },
+                    { id: 'delizia', name: 'Delizia', desc: 'Cakes, pastries, and more.', img: 'https://images.unsplash.com/photo-1603532648955-039310d9ed75?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' },
+                    { id: 'pie-in-the-sky', name: 'Pie in the Sky', desc: 'A slice of heaven.', img:'https://images.unsplash.com/photo-1597528662465-55ece5734101?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' }
+                ],
+                // Add more categories and restaurants as needed
+            };
+        
+
+            // --- FUNCTIONS (Skills) ---
+
+            // Function to toggle modals
+            const toggleModal = (modal) => {
+                if (modal.classList.contains('hidden')) {
+                    modal.classList.remove('hidden');
+                    setTimeout(() => {
+                        modal.classList.remove('opacity-0', '-translate-y-4');
+                    }, 10);
+                } else {
+                    modal.classList.add('opacity-0', '-translate-y-4');
+                    setTimeout(() => {
+                        modal.classList.add('hidden');
+                    }, 300);
+                }
+            };
+            
+            // Function to update the cart display
+            const updateCart = () => {
+                cartCount.textContent = cart.length;
+                if (cart.length === 0) {
+                    cartItemsContainer.innerHTML = '<p class="text-gray-500 text-center">Your cart is empty.</p>';
+                    cartTotal.textContent = 'Rs. 0';
+                    return;
+                }
+
+                cartItemsContainer.innerHTML = '';
+                let total = 0;
+                cart.forEach((item, index) => {
+                    const itemElement = document.createElement('div');
+                    itemElement.className = 'flex justify-between items-center py-2 border-b';
+                    itemElement.innerHTML = `
+                        <div>
+                            <p class="font-bold">${item.name}</p>
+                            <p class="text-sm text-gray-600">Rs. ${item.price}</p>
+                        </div>
+                        <button class="remove-from-cart-btn text-red-500 hover:text-red-700" data-index="${index}">&times; Remove</button>
+                    `;
+                    cartItemsContainer.appendChild(itemElement);
+                    total += item.price;
+                });
+
+                cartTotal.textContent = `Rs. ${total}`;
+            };
+            
+            // Function to handle adding items to cart
+            const handleAddToCart = (e) => {
+                if (e.target.classList.contains('add-to-cart-btn')) {
+                    const name = e.target.dataset.item;
+                    const price = parseInt(e.target.dataset.price);
+                    cart.push({ name, price });
+                    updateCart();
+                }
+            };
+
+            // Function to handle removing items from cart
+            const handleRemoveFromCart = (e) => {
+                 if (e.target.classList.contains('remove-from-cart-btn')) {
+                    const index = parseInt(e.target.dataset.index);
+                    cart.splice(index, 1);
+                    updateCart();
+                }
+            };
+
+            // Function to display rating toast message
+            const showRatingToast = () => {
+                ratingToast.classList.remove('opacity-0', 'translate-y-4');
+                setTimeout(() => {
+                    ratingToast.classList.add('opacity-0', 'translate-y-4');
+                }, 2000); // Hide after 2 seconds
+            };
+
+            // Function to handle rating stars
+            const attachRatingListeners = (container) => {
+                container.querySelectorAll('.rating-stars').forEach(starContainer => {
+                    const restaurantId = starContainer.dataset.restaurantId;
+                    const stars = starContainer.querySelectorAll('i');
+
+                    // Restore saved rating
+                    if (ratings[restaurantId]) {
+                        stars.forEach((star, index) => {
+                            star.className = index < ratings[restaurantId] ? 'fas fa-star cursor-pointer' : 'far fa-star cursor-pointer';
+                        });
+                    }
+
+                    stars.forEach((star, index) => {
+                        star.addEventListener('click', () => {
+                            const rating = index + 1;
+                            ratings[restaurantId] = rating; // Save the rating
+                            stars.forEach((s, i) => {
+                                s.className = i < rating ? 'fas fa-star cursor-pointer' : 'far fa-star cursor-pointer';
+                            });
+                            showRatingToast();
+                        });
+                    });
+                });
+            };
+
+            // Function to display restaurants in the category modal
+            const showCategoryRestaurants = (category) => {
+                const restaurants = restaurantData[category] || [];
+                categoryModalTitle.textContent = `${category} Restaurants`;
+                categoryRestaurantsList.innerHTML = ''; // Clear previous list
+
+                if (restaurants.length === 0) {
+                     categoryRestaurantsList.innerHTML = '<p class="text-gray-500">No restaurants found for this category.</p>';
+                } else {
+                    restaurants.forEach(rest => {
+                        const restElement = document.createElement('div');
+                        restElement.className = 'bg-white rounded-lg shadow overflow-hidden flex';
+                        restElement.innerHTML = `
+                            <img src="${rest.img}" alt="${rest.name}" class="w-1/3 h-full object-cover" onerror="this.onerror=null;this.src='https://placehold.co/400x400/cccccc/ffffff?text=${rest.name}';">
+                            <div class="p-4 flex flex-col justify-between">
+                                <div>
+                                    <h4 class="text-lg font-bold">${rest.name}</h4>
+                                    <p class="text-gray-600 text-sm">${rest.desc}</p>
+                                </div>
+                                <div class="flex items-center text-yellow-400 mt-2 rating-stars" data-restaurant-id="${rest.id}">
+                                    <i class="far fa-star cursor-pointer"></i><i class="far fa-star cursor-pointer"></i><i class="far fa-star cursor-pointer"></i><i class="far fa-star cursor-pointer"></i><i class="far fa-star cursor-pointer"></i>
+                                </div>
+                            </div>
+                        `;
+                         categoryRestaurantsList.appendChild(restElement);
+                    });
+                }
+                attachRatingListeners(categoryRestaurantsList); // Attach listeners to new content
+                toggleModal(categoryModal);
+            };
+
+            // --- EVENT LISTENERS (Listening for Clicks) ---
+
+            // Cart listeners
+            cartBtn.addEventListener('click', () => toggleModal(cartModal));
+            closeCartBtn.addEventListener('click', () => toggleModal(cartModal));
+
+            // Customer Service listeners
+            serviceBtn.addEventListener('click', () => toggleModal(serviceModal));
+            serviceBtnMobile.addEventListener('click', () => toggleModal(serviceModal));
+            closeServiceBtn.addEventListener('click', () => toggleModal(serviceModal));
+
+            // Location listeners
+            locationBtn.addEventListener('click', () => toggleModal(locationModal));
+            locationBtnMobile.addEventListener('click', () => toggleModal(locationModal));
+            closeLocationBtn.addEventListener('click', () => toggleModal(locationModal));
+            setLocationConfirmBtn.addEventListener('click', () => {
+                const city = cityInput.value.trim();
+                const province = provinceInput.value.trim();
+                if (city && province) {
+                    const newLocation = `${city}, ${province}`;
+                    locationText.textContent = newLocation;
+                    locationTextMobile.textContent = newLocation;
+                    toggleModal(locationModal);
+                }
+            });
+
+            // Add/Remove from cart listeners (delegated to the document)
+            document.addEventListener('click', handleAddToCart);
+            cartItemsContainer.addEventListener('click', handleRemoveFromCart);
+           
+            // Mobile Menu listener
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // Category listeners
+            categoryLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const category = link.dataset.category;
+                    showCategoryRestaurants(category);
+                });
+            });
+
+            // listeners for category modal
+            closeCategoryBtn.addEventListener('click', () => toggleModal(categoryModal));
+            footerCloseCategoryBtn.addEventListener('click', () => toggleModal(categoryModal));
+            
+            // Close modals when clicking outside
+            window.addEventListener('click', (e) => {
+                if (e.target === cartModal) toggleModal(cartModal);
+                if (e.target === serviceModal) toggleModal(serviceModal);
+                if (e.target === categoryModal) toggleModal(categoryModal);
+                if (e.target === locationModal) toggleModal(locationModal);
+            });
+
+            // --- INITIALIZATION ---
+            attachRatingListeners(document.body); // Initial call for the main page
+        });
+    </script>
+</body>
+</html>
+
